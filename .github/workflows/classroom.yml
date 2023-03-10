@@ -1,0 +1,46 @@
+name: GitHub Classroom Workflow
+
+on: [push]
+
+permissions:
+  checks: write
+  actions: read
+  contents: read
+
+jobs:
+  build:
+    name: Autograding
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: education/autograding@v1
+      # - name: 'ls files'
+      #   if: always()
+      #   run: ls -al . && ls -al ./milestone-1-tests/
+      #   continue-on-error: true
+      - name: "Check file existence"
+        id: check_files_backend
+        if: always()
+        uses: andstor/file-existence-action@v2
+        with:
+          files: "backend/eslint-report.json"
+      - name: "Check file existence"
+        id: check_files_frontend
+        if: always()
+        uses: andstor/file-existence-action@v2
+        with:
+          files: "frontend/eslint-report.json"
+      - name: Annotate Linting Results - Backend
+        uses: ataylorme/eslint-annotate-action@v2
+        continue-on-error: true
+        if: always() && steps.check_files_backend.outputs.files_exists == 'true'
+        with:
+          repo-token: "${{secrets.GITHUB_TOKEN}}"
+          report-json: "backend/eslint-report.json"
+      - name: Annotate Linting Results - Frontend
+        uses: ataylorme/eslint-annotate-action@v2
+        continue-on-error: true
+        if: always() && steps.check_files_frontend.outputs.files_exists == 'true'
+        with:
+          repo-token: "${{secrets.GITHUB_TOKEN}}"
+          report-json: "frontend/eslint-report.json"
