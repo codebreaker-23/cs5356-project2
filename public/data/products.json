@@ -1,0 +1,29 @@
+[{
+    "title": "Marsshower Oatmeal & Aloe Pet Shampoo",
+    "price": "15.99",
+    "purchaseLink": "todo-replace-me",
+    "description": "Marsshower is a new, advanced dog shampoo that provides deep cleansing and nourishment for your furry friend's skin and coat. It is made with all-natural, organic ingredients and is free of harsh chemicals, ensuring a safe and effective grooming experience for your pet.",
+    "highlighted_features": ["No synthetic fragrances or preservatives", "Eco Friendly", "No harmful pesticides or preservatives"],
+    "active": true
+}, {
+    "title": "Reynolds Bees Tearless Puppy Shampoo",
+    "price": "7.29",
+    "purchaseLink": "todo-replace-me",
+    "description": "Made with some of nature's finest ingredients for your peace of mind and a happy pup. Tap into nature's power with this gentle cleanser made with buttermilk to soothe and soften skin and linseed oil to condition skin and coat.",
+    "highlighted_features": ["Helps soften skin", "Linseed oil conditions skin and coat", "Made with some of nature's finest ingredients"],
+    "active": true
+}, {
+    "title": "HotClean Medicated Itch Shampoo",
+    "price": "21.99",
+    "purchaseLink": "todo-replace-me",
+    "description": "HotClean Shampoo contains a gentle yet powerful combination of Alpha Hydroxy, Beta Hydroxy and tea tree oil that exfoliates the skin's surface and penetrates deep into the pores to cleanse and help soothe dry, itchy, irritated and inflamed skin.",
+    "highlighted_features": ["Fast allergy relieft", "Safe solution", "Effective Cleansing"],
+    "active": true
+}, {
+    "title": "Fine & Nice Pro Style Deodorizing Shampoo",
+    "price": "14.29",
+    "purchaseLink": "todo-replace-me",
+    "description": "The Fine & Nice Shampoo freshens up their coat while soothing the skin beneath with a botanical-based formula. The beneficial powers of baking soda and oatmeal combine for a 1-2 punch against unpleasant odors and irritated skin.",
+    "highlighted_features": ["Deodorizing and Soothing", "Salon grade formula with natural ingredients", "Paraben-free"],
+    "active": false
+}]
