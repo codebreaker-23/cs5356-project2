@@ -33,7 +33,7 @@ describe("Class Endpoints", () => {
     const response = await req
       .post("/api/classes")
       .send({ name: "test-class" });
-    expect(response.statusCode).toBe(200);
+    expect(response.statusCode).toBe(201); //Correcting the expected statusCode.
     expect(response.body).toEqual(
       jasmine.objectContaining({ name: "test-class" })
     );

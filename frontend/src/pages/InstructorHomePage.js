@@ -3,7 +3,7 @@ import ListClasses from "../components/ListClasses";
 import CreateClass from "../components/CreateClass";
 
 /**
- * CS-5356-TODO
+ * CS-5356
  * Show classes on the Instructor Home Page
  *
  * When this component loads for the first time,
@@ -16,10 +16,32 @@ import CreateClass from "../components/CreateClass";
  */
 const InstructorHomePage = props => {
   const [classes, setClasses] = useState([]);
+  useEffect(()=> {getClasses();}, []);
 
-  const onCodeGenerated = () => {};
+  const getClasses = () => {
+    fetch('/api/classes', { method: 'GET' }).then(
+      (res) => {
+        if(res.ok){
+          res.json().then((value)=>{
+            console.log(value.classes);
+            setClasses(value.classes);
+          });
+        }else{
+          res.json().then( value => console.log(value));
+          setClasses([]);
+        }
 
-  const onClassCreated = () => {};
+      });
+  }
+  const onCodeGenerated = () => {
+    // console.log('onCodeGenerated')
+    getClasses();
+  };
+
+  const onClassCreated = () => {
+    // console.log('onClassCreated')  
+    getClasses();
+  };
 
   return (
     <>

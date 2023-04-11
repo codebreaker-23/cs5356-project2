@@ -4,7 +4,7 @@ import ListQuestions from "./../components/ListQuestions";
 import CreateQuestion from "./../components/CreateQuestion";
 
 /**
- * CS-5356-TODO
+ * CS-5356
  * Allow users to ask questions, and view
  * other questions in the class session.
  *
@@ -22,12 +22,30 @@ const ClassSessionPage = props => {
   const [questions, setQuestions] = useState([]);
   const { sessionCode } = useParams();
 
+  useEffect(() => {
+    getQuestions();
+}, []);
+
+  const getQuestions = () => {
+    fetch("/api/class-session/" + sessionCode, {
+        method: "GET",
+    }).then( response => {
+        if (response.ok ) {
+          response.json().then( data =>setQuestions(data.questions));
+        } else {
+          response.json().then( data => console.log(data.message));
+        }
+    });
+};
+
   const onQuestionCreated = () => {
     console.log("[CS5356] On question created");
+    getQuestions();
   };
 
   const onQuestionUpvoted = () => {
     console.log("[CS5356] On question upvoted");
+    getQuestions();
   };
 
   return (
@@ -42,7 +60,7 @@ const ClassSessionPage = props => {
         <ListQuestions
           sessionCode={sessionCode}
           questions={questions}
-          isSignedIn={false}
+          isSignedIn= {props.isSignedIn}
           onQuestionUpvoted={onQuestionUpvoted}
         />
       </div>

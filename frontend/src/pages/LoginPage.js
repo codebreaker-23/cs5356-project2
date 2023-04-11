@@ -1,9 +1,8 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 
 /**
  *
- * CS-5356-TODO Login Page
+ * CS-5356 Login Page
  *
  * We're going to use a "mock" login system, so
  * all we need the user to provide is a username.
@@ -15,10 +14,21 @@ import { useNavigate } from "react-router-dom";
 const LoginPage = props => {
   const navigate = useNavigate();
 
-  const handleSubmit = e => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
+    const response = await fetch('/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: e.target.username.value })
+    });
+    if (response.ok) {
+      props.onLogin();
+      navigate('/instructor-home');
+    }else{
+      console.log('Failed to Login');
+    }
     /**
-     * CS-5356-TODO
+     * CS-5356
      *
      * Log the user in. Grab the value from the username input element
      * and send it in an object to POST /api/login
@@ -33,15 +43,13 @@ const LoginPage = props => {
       <div className="container hero-body">
         <h1 className="title">Login to Class Questions</h1>
         <form onSubmit={handleSubmit}>
-          <label className="label" htmlFor="username">
-            Username
-          </label>
-          {/* Add an input for the username */}
+          <label className="label" htmlFor="username"> Username</label>
+          <input type="text" name="username" />
           <label className="label" htmlFor="password">
             Password
           </label>
           <div>Anonymous access while in prototype mode</div>
-          <div>{/* Add an input to submit the form */}</div>
+          <div><input type="submit" value="Log in" /></div>
         </form>
       </div>
     </section>

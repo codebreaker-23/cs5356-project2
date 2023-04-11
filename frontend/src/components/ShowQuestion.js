@@ -1,5 +1,5 @@
 /**
- * CS-5356-TODO
+ * CS-5356
  * Show a question and upvote/dismiss it
  *
  * When a user clicks on the Upvote button,
@@ -14,6 +14,18 @@
 const ShowQuestion = props => {
   const handleUpvote = questionId => {
     console.log("Upvoting questionId", questionId);
+    fetch('/api/class-session/' + props.sessionCode + '/question/' + questionId + '/upvote', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    }).then(response => {
+      if(response.ok){
+        props.onQuestionUpvoted()
+      }else{
+        response.json().then(data => console.log(data));
+      }
+    });
   };
 
   return (
