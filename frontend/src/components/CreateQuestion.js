@@ -1,5 +1,5 @@
 /**
- * CS-5356-TODO
+ * CS-5356
  * Create a question for a class session
  *
  * A user can provide the content of their question,
@@ -12,9 +12,25 @@
  * to tell the parent component to refresh the view
  */
 const CreateQuestion = props => {
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     console.log("[CS5356] on create question form submitted");
+    fetch('/api/class-session/' + props.sessionCode + '/question', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        question: e.target.question.value,
+        name: e.target.id.value,
+    })
+    }).then(response => {
+      if(response.ok){
+        props.onQuestionCreated();
+      }else{
+        response.json().then(data => console.log(data));
+      }
+    })
   };
   return (
     <>
@@ -30,19 +46,19 @@ const CreateQuestion = props => {
             Type your question
           </label>
           <div className="control">
-            {/* Add an input for the user to type in text */}
+            <input type="text" name="question" />
           </div>
         </div>
         <div className="field" style={{ width: "50%" }}>
           <label className="label" htmlFor="name">
             Name (optional)
           </label>
-          {/* Add an input for the user's name */}
+          <input type="text" name="id" />
         </div>
 
         <div className="field">
           <div className="control">
-            {/* Add an input to submit the form  */}
+            <input type="submit" value="Submit" />
           </div>
         </div>
       </form>

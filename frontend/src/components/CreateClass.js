@@ -1,5 +1,5 @@
 /**
- * CS-5356-TODO
+ * CS-5356
  * Create a new class
  *
  * A user should provide a `name` property
@@ -11,9 +11,26 @@
  * to notify the parent component to refresh the view
  */
 const CreateClass = props => {
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     console.log("[CS5356] On handle create class");
+
+    fetch('/api/classes', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: event.target.name.value,
+      }),
+    }).then(res => {
+      if (res.ok) {
+        console.log('got response');
+        props.onClassCreated();
+      } else {
+        res.json().then(data => console.log(data));
+      }
+    });
   };
 
   return (
@@ -32,11 +49,13 @@ const CreateClass = props => {
             <label className="label" htmlFor="name">
               Class Name
             </label>
-            <div className="control">{/* Add an input for the name */}</div>
+            <div className="control">
+              <input type="text" name="name" />
+            </div>
           </div>
           <div className="field has-text-centered">
             <div className="control">
-              {/* Add an input to submit the form */}
+              <input type="submit" value="Enter" />
             </div>
           </div>
         </form>

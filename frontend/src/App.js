@@ -44,6 +44,18 @@ const App = () => {
 
   useEffect(() => {
     console.log("[CS5356] Loading App for the first time");
+    fetch('/api/user', {
+      method: "GET",
+    }).then((res) => {
+      if (res.ok) {
+        setIsSignedIn(true);
+        res.json().then((values) => {
+          setUser(values);
+        });
+      } else {
+        setIsSignedIn(false);
+      }
+    });
   }, []);
 
   return (

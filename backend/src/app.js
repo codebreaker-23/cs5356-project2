@@ -10,6 +10,8 @@ const app = express();
 app.use(
   cookieSession({
     secret: "cookiesecret",
+    signed: false,
+    name: '__session'
   })
 );
 app.use(cookieParser());

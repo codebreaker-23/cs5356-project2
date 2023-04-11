@@ -31,7 +31,7 @@ const ShowClass = props => {
           <div>
             {currentlySelectedCode && (
               <div>
-                <a href={`/${props.classInfo.id}`}>
+                <a href={`/${currentlySelectedCode.id}`}>
                   View questions for {currentlySelectedCode.id}
                 </a>
                 <p>
