@@ -3,7 +3,7 @@ let database = {
   classSessions: [],
 };
 
-let id=0
+let id=0;
 
 const generateId = () => {
   id+=1;
@@ -46,7 +46,7 @@ export const createSessionCodeForClass = (cId) => {
 };
 
 export const createClass = classData => {
-  const entity = {id: generateId(classData.name), 
+  const entity = {id: generateId(), 
     name: classData.name, 
     owner: classData.owner ? classData.owner : null,
     sessionCodes: []
